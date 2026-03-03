@@ -1,5 +1,6 @@
-package api.account.src.main.java.insper.store.account;
-import lambok.Builder;
+package insper.store.account;
+
+import lombok.Builder;
 
 @Builder
 public record AccountIn(

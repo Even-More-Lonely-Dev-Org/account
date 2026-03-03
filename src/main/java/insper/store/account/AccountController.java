@@ -1,4 +1,4 @@
-package store.account;
+package insper.store.account;
 
 import java.util.List;
 
@@ -10,24 +10,21 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
-@FeignClient(
-    name = "account",
-    url = "http://account:8080"
-)
-public interface AccountControler {
-    
+@FeignClient(name = "account", url = "http://account:8080")
+public interface AccountController {
+
+    @GetMapping("/accounts/healthCheck")
+    public ResponseEntity<Void> healthCheck();
+
     @PostMapping("/accounts")
     public ResponseEntity<Void> create(
-        @RequestBody AccountIn accountIn in 
+        @RequestBody AccountIn in
     );
 
-    @DeleteMapping("/account/{id}")
+    @DeleteMapping("/accounts/{id}")
     public ResponseEntity<Void> delete(
         @PathVariable String id
     );
-    
-    @GetMapping("/accounts/health-check")
-    public ResponseEntity<Void> healthCheck();
 
     @GetMapping("/accounts")
     public ResponseEntity<List<AccountOut>> findAll();
@@ -35,6 +32,6 @@ public interface AccountControler {
     @GetMapping("/accounts/{id}")
     public ResponseEntity<AccountOut> findById(
         @PathVariable String id
-    );
+    );    
 
 }
