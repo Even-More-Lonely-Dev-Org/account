@@ -13,9 +13,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 @FeignClient(name = "account", url = "http://account:8080")
 public interface AccountController {
 
-    @GetMapping("/accounts/healthCheck")
-    public ResponseEntity<Void> healthCheck();
-
     @PostMapping("/accounts")
     public ResponseEntity<Void> create(
         @RequestBody AccountIn in
@@ -26,13 +23,16 @@ public interface AccountController {
         @PathVariable String id
     );
 
+    @GetMapping("/accounts/health-check")
+    public ResponseEntity<Void> healthCheck();
+
     @GetMapping("/accounts")
     public ResponseEntity<List<AccountOut>> findAll();
 
     @GetMapping("/accounts/{id}")
     public ResponseEntity<AccountOut> findById(
         @PathVariable String id
-    );    
+    );
 
     @PostMapping("/accounts/login")
     public ResponseEntity<AccountOut> findByEmailAndPassword(
